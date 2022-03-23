@@ -1,7 +1,9 @@
 <template>
   <div>
-    <Navigation />
-    Statistics</div>
+    <Layout content-class="layout">
+       statistics 
+    </Layout>
+  </div>
 </template>
 
 <script>

@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <Navigation />
-Money
-    </div>
+ <div>
+    <Layout content-class="layout">
+      money
+    </Layout>
+  </div>
 </template>
 
 <script>
