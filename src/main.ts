@@ -6,6 +6,7 @@ import store from './store'
 import Navigation from "@/components/Navigation.vue"
 import Layout from "@/components/Layout.vue"
 import Icon from "@/components/Icon.vue"
+import "@/assets/style/reset.scss"
 
 Vue.config.productionTip = false
 // eslint-disable-next-line vue/multi-word-component-names
