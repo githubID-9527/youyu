@@ -18,15 +18,17 @@ import Type from "@/components/Type.vue";
 import Nodes from "@/components/Nodes.vue";
 import Keyboard from "@/components/Keyboard.vue";
 import model from "@/model"
+import tagListModel from "@/tagListModel"
 
 const recordList = model.fetch()
+const tagList= tagListModel.fetch()
 
 @Component({
   name: "Pay",
   components: { Tags, Keyboard, Layout, Type, Nodes },
 })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行"];
+  tags = tagList;
   recordList: RecordItem[] = recordList
   record: RecordItem = {
     tags: [],
