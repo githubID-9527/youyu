@@ -21,14 +21,15 @@ import Tags from "@/components/Tags.vue";
 import Type from "@/components/Type.vue";
 import FormItem from "@/components/FormItem.vue";
 import Keyboard from "@/components/Keyboard.vue";
+import store from '@/store/index2';
 
 @Component({
   name: "Money",
   components: { Tags, Keyboard, Layout, Type, FormItem },
 })
 export default class Money extends Vue {
-  tags = window.tagList;
-  recordList = window.recordList;
+  tags = store.tagList;
+  recordList = store.recordList;
   record: RecordItem = {
     tags: [],
     notes: "",
@@ -42,7 +43,7 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
   saveRecord() {
-    window.createRecord(this.record);
+    store.createRecord(this.record);
   }
 }
 </script>
