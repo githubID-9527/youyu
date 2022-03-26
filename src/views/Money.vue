@@ -28,7 +28,7 @@ const recordList = model.fetch();
 const tagList = tagListModel.fetch();
 
 @Component({
-  name: "Pay",
+  name: "Money",
   components: { Tags, Keyboard, Layout, Type, FormItem },
 })
 export default class Money extends Vue {

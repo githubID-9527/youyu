@@ -3,20 +3,21 @@
     <ul class="current">
       <li
         v-for="tag in tags"
-        :key="tag"
+        :key="tag.id"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
         @click="select(tag)"
       >
-        {{ tag }}
+        {{ tag.name }}
       </li>
     </ul>
     <div class="new">
-      <button>添加标签</button>
+      <button @click="create">添加标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import tagListModel from "@/tagListModel";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
@@ -34,6 +35,17 @@ export default class Tags extends Vue {
     }
     this.$emit("onUpdate:value", this.selectedTags);
   }
+   create() {
+     const name = window.prompt("请输出标签名");
+    if (name) {
+      const message = tagListModel.create(name);
+      if (message === "duplicated") {
+        window.alert("标签名重复了");
+      } else if (message === "success") {
+        window.alert("添加成功");
+      }
+    }
+    }
 }
 </script>
 
