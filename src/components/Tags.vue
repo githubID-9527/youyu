@@ -42,9 +42,10 @@ export default class Tags extends Vue {
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  margin: 10px 0;
+  margin: 1px 0;
   padding: 16px;
   flex-grow: 1;
+  background: white;
   > .current {
     display: flex;
     flex-wrap: wrap;

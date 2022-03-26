@@ -2,7 +2,11 @@
   <div>
     <Layout content-class="layout">
       <Tags :tags.sync="tags" @update:value="onUpdateTags" />
-      <Nodes @update:value="onUpdateNodes" />
+      <FormItem
+        @update:value="onUpdateNodes"
+        field-name="备注"
+        placeholder="在这里输入备注"
+      />
       <Type :value.sync="record.type" />
       <Keyboard :value.sync="record.amount" @submit="saveRecord" />
     </Layout>
@@ -15,21 +19,21 @@ import { Component, Watch } from "vue-property-decorator";
 import Layout from "@/components/Layout.vue";
 import Tags from "@/components/Tags.vue";
 import Type from "@/components/Type.vue";
-import Nodes from "@/components/Nodes.vue";
+import FormItem from "@/components/FormItem.vue";
 import Keyboard from "@/components/Keyboard.vue";
-import model from "@/model"
-import tagListModel from "@/tagListModel"
+import model from "@/model";
+import tagListModel from "@/tagListModel";
 
-const recordList = model.fetch()
-const tagList= tagListModel.fetch()
+const recordList = model.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   name: "Pay",
-  components: { Tags, Keyboard, Layout, Type, Nodes },
+  components: { Tags, Keyboard, Layout, Type, FormItem },
 })
 export default class Money extends Vue {
   tags = tagList;
-  recordList: RecordItem[] = recordList
+  recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [],
     notes: "",
@@ -44,12 +48,12 @@ export default class Money extends Vue {
   }
   saveRecord() {
     const record2: RecordItem = model.clone(this.record);
-    record2.createdAt = new Date()
+    record2.createdAt = new Date();
     this.recordList.push(record2);
   }
   @Watch("recordList")
   onRecordListChange() {
-    model.save(recordList)
+    model.save(recordList);
   }
 }
 </script>
