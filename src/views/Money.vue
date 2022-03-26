@@ -22,17 +22,15 @@ import Type from "@/components/Type.vue";
 import FormItem from "@/components/FormItem.vue";
 import Keyboard from "@/components/Keyboard.vue";
 import model from "@/model";
-import tagListModel from "@/tagListModel";
 
 const recordList = model.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   name: "Money",
   components: { Tags, Keyboard, Layout, Type, FormItem },
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [],
