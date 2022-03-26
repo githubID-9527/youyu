@@ -2,7 +2,7 @@
   <div class="tags">
     <ul class="current">
       <li
-        v-for="tag in tags"
+        v-for="tag in tagList"
         :key="tag.id"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
         @click="select(tag)"
@@ -17,13 +17,13 @@
 </template>
 
 <script lang="ts">
-import tagListModel from "@/tagListModel";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
+import store from "@/store/index2";
 
 @Component
 export default class Tags extends Vue {
-  @Prop() tags: string[] | undefined;
+  tagList = store.fetchTags();
   selectedTags: string[] = [];
 
   select(tag: string) {
@@ -35,17 +35,13 @@ export default class Tags extends Vue {
     }
     this.$emit("onUpdate:value", this.selectedTags);
   }
-   create() {
-     const name = window.prompt("请输出标签名");
-    if (name) {
-      const message = tagListModel.create(name);
-      if (message === "duplicated") {
-        window.alert("标签名重复了");
-      } else if (message === "success") {
-        window.alert("添加成功");
-      }
+  create() {
+    const name = window.prompt("请输出标签名");
+    if (!name) {
+      return window.alert("标签名不能为空");
     }
-    }
+    store.createTag(name);
+  }
 }
 </script>
 
