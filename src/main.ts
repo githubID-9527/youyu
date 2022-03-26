@@ -8,12 +8,16 @@ import Layout from "@/components/Layout.vue"
 import Icon from "@/components/Icon.vue"
 import "@/assets/style/reset.scss"
 import tagListModel from './tagListModel'
+import model from '@/model';
 
 Vue.config.productionTip = false
 // eslint-disable-next-line vue/multi-word-component-names
 Vue.component("Navigation", Navigation)
 Vue.component("Layout", Layout)
 Vue.component("Icon", Icon)
+
+window.recordList = model.fetch();
+window.createRecord = (record: RecordItem)=> model.create(record);
 
 window.tagList = tagListModel.fetch();
 window.createTag = (name: string) => {
