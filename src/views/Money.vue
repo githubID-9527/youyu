@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout content-class="layout">
-      <Tags :tags.sync="tags" @update:value="onUpdateTags" />
+      <Tags />
       <FormItem
         @update:value="onUpdateNodes"
         field-name="备注"
@@ -21,29 +21,31 @@ import Tags from "@/components/Tags.vue";
 import Type from "@/components/Type.vue";
 import FormItem from "@/components/FormItem.vue";
 import Keyboard from "@/components/Keyboard.vue";
-import store from '@/store/index2';
 
 @Component({
   name: "Money",
   components: { Tags, Keyboard, Layout, Type, FormItem },
 })
 export default class Money extends Vue {
-  tags = store.tagList;
-  recordList = store.recordList;
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
+
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
+  created() {
+    this.$store.commit("fetchRecords");
   }
   onUpdateNodes(value: string) {
     this.record.notes = value;
   }
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit("createRecord", this.record);
   }
 }
 </script>
