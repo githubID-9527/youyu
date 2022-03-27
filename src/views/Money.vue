@@ -7,7 +7,7 @@
         field-name="备注"
         placeholder="在这里输入备注"
       />
-      <Type :value.sync="record.type" />
+       <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
       <Keyboard :value.sync="record.amount" @submit="saveRecord" />
     </Layout>
   </div>
@@ -18,15 +18,17 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Layout from "@/components/Layout.vue";
 import Tags from "@/components/Tags.vue";
-import Type from "@/components/Type.vue";
 import FormItem from "@/components/FormItem.vue";
 import Keyboard from "@/components/Keyboard.vue";
+ import Tabs from '@/components/Tabs.vue';
+import recordTypeList from '@/constants/recordTypeList';
 
 @Component({
   name: "Money",
-  components: { Tags, Keyboard, Layout, Type, FormItem },
+  components: { Tags, Keyboard, Layout, FormItem, Tabs },
 })
 export default class Money extends Vue {
+  recordTypeList = recordTypeList;
   record: RecordItem = {
     tags: [],
     notes: "",
